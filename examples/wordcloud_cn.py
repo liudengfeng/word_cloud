@@ -13,7 +13,7 @@ at the same time using wordcloud with jieba very convenient
 """
 
 import jieba
-jieba.enable_parallel(4)
+# jieba.enable_parallel(4)
 # Setting up parallel processes :4 ,but unable to run on Windows
 from os import path
 from imageio import imread
@@ -37,7 +37,7 @@ imgname2 = d + '/wc_cn/LuXun_colored.jpg'
 back_coloring = imread(path.join(d, d + '/wc_cn/LuXun_color.jpg'))
 
 # Read the whole text.
-text = open(path.join(d, d + '/wc_cn/CalltoArms.txt')).read()
+text = open(path.join(d, d + '/wc_cn/CalltoArms.txt'), encoding='utf-8').read()
 
 # if you want use wordCloud,you need it
 # add userdict by add_word()
@@ -63,9 +63,17 @@ def jieba_processing_txt(text):
     return ' '.join(mywordlist)
 
 
-wc = WordCloud(font_path=font_path, background_color="white", max_words=2000, mask=back_coloring,
-               max_font_size=100, random_state=42, width=1000, height=860, margin=2,)
-
+wc = WordCloud(
+    font_path=font_path,
+    background_color="white",
+    max_words=2000,
+    mask=back_coloring,
+    max_font_size=100,
+    random_state=42,
+    width=1000,
+    height=860,
+    margin=2,
+)
 
 wc.generate(jieba_processing_txt(text))
 
